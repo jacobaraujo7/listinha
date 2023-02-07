@@ -54,3 +54,8 @@ Informações de mockup, fonte e assets estão disponíveis no Figma.
 # 3. Arquitetura
 
 [Geral](ARCHITECTURE.md)
+
+
+# 4. Vídeos
+
+[#1. Iniciando os projetos](https://youtu.be/Y9QwJewv50w)
