@@ -24,8 +24,7 @@ Pontos a serem levados em consideração antes de introduzir uma nova feature:
 
 # Entidades
 
-(Será criado pelos alunos da Masterclass Intermediário 1)
-
+![image](assets/entities.png)
 # Casos de Uso
 
 (Será criado pelos alunos da Masterclass Intermediário 1)
