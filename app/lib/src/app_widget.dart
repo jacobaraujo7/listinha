@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:listinha/src/home/home_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'shared/themes/themes.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    Modular.setInitialRoute('/home/');
+
+    return MaterialApp.router(
+      title: 'Flutter Listinha',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: const HomePage(),
+      routerDelegate: Modular.routerDelegate,
+      routeInformationParser: Modular.routeInformationParser,
     );
   }
 }
