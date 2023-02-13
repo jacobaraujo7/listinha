@@ -39,6 +39,7 @@ dependencies:
   result_dart: ^1.0.5
   flutter_modular: ^6.0.0-alpha.5
   realm: ^1.0.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
