@@ -57,7 +57,9 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.edit),
         label: const Text('Nova Lista'),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed('./edit');
+        },
       ),
     );
   }
