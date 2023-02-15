@@ -2,15 +2,13 @@ import 'package:common/entities/entity.dart';
 import 'package:common/value_objects/value_object.dart';
 import 'package:result_dart/result_dart.dart';
 
-enum SynchronizationStatus { updated, pending }
+class Tokenization extends Entity {
+  final String accessToken;
+  final String refreshToken;
 
-class Synchronization extends Entity {
-  final SynchronizationStatus status;
-  final DateTime lastUpdated;
-
-  Synchronization({
-    required this.status,
-    required this.lastUpdated,
+  Tokenization({
+    required this.accessToken,
+    required this.refreshToken,
   });
 
   @override

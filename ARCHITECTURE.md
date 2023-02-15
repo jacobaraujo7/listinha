@@ -27,7 +27,31 @@ Pontos a serem levados em consideração antes de introduzir uma nova feature:
 ![image](assets/entities.png)
 # Casos de Uso
 
-(Será criado pelos alunos da Masterclass Intermediário 1)
+**Board**
+- Criar Novo board
+- Filtrar boards
+- Carregar Boards
+- Salvar Boards
+
+**Configurações**
+- Carregar configurações
+- Salvar configurações
+
+**Usuario**
+- Carregar o usuário
+- Salvar o usuário
+- Criar o usuário
+
+**Autenticação**
+- Solicitar código de verificação para autenticação
+- Validar código de verificação para autenticação
+- Solicitar token de acesso
+- Salvar token de acesso
+- Atualizar token de acesso
+
+**Sincronização**
+- DownloadBoards
+- UploadBoards
 
 
 # Design Patterns

@@ -12,3 +12,6 @@ environment:
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.21.0
+dependencies:
+  result_dart: ^1.0.5
+  string_validator: ^0.3.0
