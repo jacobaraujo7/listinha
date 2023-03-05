@@ -1,5 +1,6 @@
 name: listinha
 description: A new Flutter project.
+
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+  sdk: '>=2.18.6 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,7 +39,7 @@ dependencies:
   uno: ^1.0.1+5
   result_dart: ^1.0.5
   flutter_modular: ^5.0.3
-  realm: ^1.0.0
+  realm: ^0.8.0+rc
 
 dev_dependencies:
   flutter_test:
