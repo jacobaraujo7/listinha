@@ -36,7 +36,7 @@ Pontos a serem levados em consideração antes de introduzir uma nova feature:
 - Repository Pattern: Para acesso a API externa.
 - Service Pattern: Para isolar trechos de códigos com outras responsabilidades.
 - Dependency Injection: Resolver dependências das classes.
-- Store: Guardar e mudar estados.
+- Atomic State: Guardar e mudar estados.
 - State pattern: Padrão que auxilia no gerenciamento estados.
 - Adapter: Converter um objeto em outro.
 - Result: Trabalhar com retorno Múltiplo.
@@ -53,6 +53,7 @@ Pontos a serem levados em consideração antes de introduzir uma nova feature:
 
 - flutter_modular: Modularização de rotas e injeção de dependências.
 - realm: Base de dados local.
+- intl: Internacionalização.
 
 # Package externos (Backend)
 
