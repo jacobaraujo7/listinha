@@ -209,14 +209,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.4"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -511,10 +503,10 @@ packages:
     dependency: "direct main"
     description:
       name: rx_notifier
-      sha256: "1886d7259aa2675ce69360920737880c1263f4dbdf89466f6265c302c5df9422"
+      sha256: "680dee9c12d44dbe758e1ef5664f9350216bf63c4e842736f39b86d82c53ca4f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0+5"
+    version: "2.2.0+2"
   rx_notifier_annotation:
     dependency: transitive
     description:

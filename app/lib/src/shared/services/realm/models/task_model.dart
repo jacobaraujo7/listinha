@@ -18,3 +18,28 @@ class _TaskBoard {
   late List<_Task> tasks;
   bool enable = true;
 }
+
+extension TaskBoardExtension on TaskBoard {
+  double get progress {
+    if (tasks.isEmpty) return 0;
+    final completes = tasks.where((task) => task.complete).length;
+    return completes / tasks.length;
+  }
+
+  TaskBoardStatus get status {
+    if (!enable) {
+      return TaskBoardStatus.disabled;
+    } else if (progress < 1.0) {
+      return TaskBoardStatus.pending;
+    } else {
+      return TaskBoardStatus.completed;
+    }
+  }
+}
+
+enum TaskBoardStatus {
+  pending,
+  completed,
+  disabled,
+  all,
+}

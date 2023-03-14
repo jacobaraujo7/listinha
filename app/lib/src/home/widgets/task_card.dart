@@ -16,14 +16,14 @@ enum TaskCardStatus {
 class TaskCard extends StatelessWidget {
   final TaskBoard board;
   final double height;
+  final void Function()? onTap;
 
-  const TaskCard({super.key, required this.board, this.height = 130});
-
-  double getProgress(List<Task> tasks) {
-    if (tasks.isEmpty) return 0;
-    final completes = tasks.where((task) => task.complete).length;
-    return completes / tasks.length;
-  }
+  const TaskCard({
+    super.key,
+    required this.board,
+    this.height = 130,
+    this.onTap,
+  });
 
   String getProgressText(List<Task> tasks) {
     final completes = tasks.where((task) => task.complete).length;
@@ -66,7 +66,7 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final progress = getProgress(board.tasks);
+    final progress = board.progress;
     final progressText = getProgressText(board.tasks);
     final title = board.title;
     final status = getStatus(board, progress);
@@ -77,63 +77,66 @@ class TaskCard extends StatelessWidget {
     final backgroundColor = getBackgroundColor(status, theme);
     final color = getColor(status, theme);
 
-    return Container(
-      height: height,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      padding: const EdgeInsets.symmetric(
-        vertical: 12,
-        horizontal: 20,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                iconData,
-                color: theme.iconTheme.color?.withOpacity(0.5),
-              ),
-              const Spacer(),
-              Text(
-                statusText,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: theme.textTheme.bodySmall?.color?.withOpacity(0.5),
-                ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          Text(
-            title,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 8),
-          if (board.tasks.isNotEmpty)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: height,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(25),
+        ),
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 20,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                LinearProgressIndicator(
-                  value: progress,
-                  color: color,
+                Icon(
+                  iconData,
+                  color: theme.iconTheme.color?.withOpacity(0.5),
                 ),
-                const SizedBox(height: 2),
+                const Spacer(),
                 Text(
-                  progressText,
+                  statusText,
                   style: theme.textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: theme.textTheme.bodySmall?.color?.withOpacity(0.5),
                   ),
                 ),
               ],
-            )
-        ],
+            ),
+            const Spacer(),
+            Text(
+              title,
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            if (board.tasks.isNotEmpty)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  LinearProgressIndicator(
+                    value: progress,
+                    color: color,
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    progressText,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: theme.textTheme.bodySmall?.color?.withOpacity(0.5),
+                    ),
+                  ),
+                ],
+              )
+          ],
+        ),
       ),
     );
   }

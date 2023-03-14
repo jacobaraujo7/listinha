@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listinha/src/shared/services/realm/models/task_model.dart';
-import 'package:realm/realm.dart';
+import 'package:rx_notifier/rx_notifier.dart';
 
+import '../shared/services/realm/models/task_model.dart';
 import '../shared/widgets/user_image_button.dart';
+import 'atom/home_atom.dart';
 import 'widgets/custom_drawer.dart';
 import 'widgets/task_card.dart';
 
@@ -15,7 +16,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    fetchBoardTasksAction();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final boards = context.select(() => filteredBoardTaskState);
+
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
@@ -37,21 +46,17 @@ class _HomePageState extends State<HomePage> {
                 right: 30,
                 bottom: 200,
               ),
-              itemCount: 100,
+              itemCount: boards.length,
               itemBuilder: (_, index) {
-                final board = TaskBoard(
-                  Uuid.v4(),
-                  'Nova lista de tarefas 1',
-                  tasks: [
-                    Task(Uuid.v4(), '', complete: true),
-                    Task(Uuid.v4(), '', complete: true),
-                    Task(Uuid.v4(), '', complete: true),
-                    Task(Uuid.v4(), '', complete: true),
-                  ],
-                );
+                final board = boards[index];
                 return TaskCard(
                   board: board,
                   height: 140,
+                  onTap: () async {
+                    selectedBoardTaskState.value = board;
+                    await Navigator.pushNamed(context, './edit');
+                    fetchBoardTasksAction();
+                  },
                 );
               },
               separatorBuilder: (context, index) {
@@ -62,27 +67,29 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.topCenter,
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: SegmentedButton<int>(
+                child: SegmentedButton<TaskBoardStatus>(
                   segments: const [
                     ButtonSegment(
-                      value: 0,
+                      value: TaskBoardStatus.all,
                       label: Text('Todos'),
                     ),
                     ButtonSegment(
-                      value: 1,
+                      value: TaskBoardStatus.pending,
                       label: Text('Pendentes'),
                     ),
                     ButtonSegment(
-                      value: 2,
+                      value: TaskBoardStatus.completed,
                       label: Text('Concluídas'),
                     ),
                     ButtonSegment(
-                      value: 3,
+                      value: TaskBoardStatus.disabled,
                       label: Text('Desativadas'),
                     ),
                   ],
-                  selected: const {1},
-                  onSelectionChanged: (values) {},
+                  selected: {taskBoardStatusState.value},
+                  onSelectionChanged: (values) {
+                    taskBoardStatusState.value = values.first;
+                  },
                 ),
               ),
             ),
@@ -92,9 +99,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.edit),
         label: const Text('Nova Lista'),
-        onPressed: () {
-          Navigator.of(context).pushNamed('./edit');
-        },
+        onPressed: createTaskBoardAction.call,
       ),
     );
   }
